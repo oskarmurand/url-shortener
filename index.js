@@ -1,6 +1,6 @@
 'use static';
 
-const { json, createError, sendError, send } = require('micro');
+const { json, send } = require('micro');
 const { parse } = require('url');
 const storage = require('node-persist');
 
@@ -20,7 +20,7 @@ const post = async(req, res) => {
     try {
         await write(url, alias);
     } catch(e) {
-        return createError(500);
+        return send(res, 500, 'internal error');
     }
 
     return({url});
